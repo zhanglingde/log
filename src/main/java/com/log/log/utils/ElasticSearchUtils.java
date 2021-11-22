@@ -268,8 +268,8 @@ public class ElasticSearchUtils {
         }
         if (response.status().getStatus() == 200) {
             // 解析查询结果
-            List<T> list = setSearchResponse(response, clazz);
-            return list;
+            PageUtils<T> page = setPageSearchResponse(response, clazz);
+            return page;
         }
         return null;
     }
@@ -290,7 +290,7 @@ public class ElasticSearchUtils {
             T t = JSONUtil.toBean(json, clazz);
             list.add(t);
         }
-        page.setTotalPage(0);
+        page.setTotal((int) response.getHits().getTotalHits().value);
         page.setList(list);
         return page;
     }

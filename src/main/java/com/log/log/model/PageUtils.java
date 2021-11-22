@@ -13,7 +13,7 @@ public class PageUtils<T> {
     /**
      * 总记录数
      */
-    private int totalCount;
+    private int total;
     /**
      * 每页记录数
      */
@@ -42,7 +42,7 @@ public class PageUtils<T> {
 
     public PageUtils(List<T> list, int totalCount, int pageSize, int currPage) {
         this.list = list;
-        this.totalCount = totalCount;
+        this.total = totalCount;
         this.pageSize = pageSize;
         this.currPage = currPage;
         this.totalPage = (int)Math.ceil((double)totalCount/pageSize);

@@ -36,10 +36,8 @@ public class LogService {
         search.query(boolQueryBuilder);
         search.size(Optional.ofNullable(searchDTO.getSize()).orElse(1));
         search.from(Optional.ofNullable(searchDTO.getPage()).orElse(10));
-        List<LogVO> list = elasticSearchUtils.searchListData("log-ling-dev-2021.11.22", search, LogVO.class);
-        PageUtils<LogVO> pageUtils = new PageUtils<>();
 
-        pageUtils.setList(list);
-        return pageUtils;
+        PageUtils<LogVO> page = elasticSearchUtils.searchPageData("log-ling-dev-2021.11.22", search, LogVO.class);
+        return page;
     }
 }
