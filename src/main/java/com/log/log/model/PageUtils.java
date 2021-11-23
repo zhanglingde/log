@@ -17,7 +17,7 @@ public class PageUtils<T> {
     /**
      * 每页记录数
      */
-    private int pageSize;
+    private int size;
     /**
      * 总页数
      */
@@ -25,7 +25,7 @@ public class PageUtils<T> {
     /**
      * 当前页数
      */
-    private int currPage;
+    private int page;
     /**
      * 列表数据
      */
@@ -43,8 +43,8 @@ public class PageUtils<T> {
     public PageUtils(List<T> list, int totalCount, int pageSize, int currPage) {
         this.list = list;
         this.total = totalCount;
-        this.pageSize = pageSize;
-        this.currPage = currPage;
+        this.size = pageSize;
+        this.page = currPage;
         this.totalPage = (int)Math.ceil((double)totalCount/pageSize);
     }
 

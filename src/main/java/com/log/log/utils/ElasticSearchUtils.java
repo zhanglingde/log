@@ -1,6 +1,9 @@
 package com.log.log.utils;
 
 import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.log.log.model.PageUtils;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -40,6 +43,10 @@ public class ElasticSearchUtils {
 
     @Resource(name = "esClient")
     private RestHighLevelClient client;
+
+    @Resource
+    private ObjectMapper om;
+
 
     /**
      * 判断索引是否存在
@@ -287,8 +294,13 @@ public class ElasticSearchUtils {
         List<T> list = new ArrayList<>();
         for (SearchHit hit : response.getHits().getHits()) {
             String json = hit.getSourceAsString();
-            T t = JSONUtil.toBean(json, clazz);
-            list.add(t);
+            try {
+                T t = om.readValue(json, clazz);
+//                T t = JSONUtil.toBean(json, clazz);
+                list.add(t);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }
         page.setTotal((int) response.getHits().getTotalHits().value);
         page.setList(list);
