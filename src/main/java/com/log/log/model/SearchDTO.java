@@ -16,10 +16,11 @@ public class SearchDTO {
     private String level;
     private Integer page;
     private Integer size;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "",timezone = "Asia/Shanghai")
-    private Date startTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "",timezone = "Asia/Shanghai")
-    private Date endTime;
+    // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    // @JsonFormat(pattern = "",timezone = "Asia/Shanghai")
+    private String startTime;
+    // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    // @JsonFormat(pattern = "",timezone = "Asia/Shanghai")
+    private String endTime;
+    private String day;
 }
