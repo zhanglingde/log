@@ -3,6 +3,7 @@ package com.log.log.controller;
 
 import com.log.log.model.LogVO;
 import com.log.log.model.PageUtils;
+import com.log.log.model.ResultVO;
 import com.log.log.model.SearchDTO;
 import com.log.log.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class LogController {
     LogService logService;
 
     @GetMapping("/")
-    public PageUtils<LogVO> logList(SearchDTO searchDTO){
-        PageUtils<LogVO> page = logService.logList(searchDTO);
-        return page;
+    public ResultVO<PageUtils<LogVO>> logList(SearchDTO searchDTO){
+        ResultVO<PageUtils<LogVO>> pageUtilsResultVO = logService.logList(searchDTO);
+        return pageUtilsResultVO;
     }
 }

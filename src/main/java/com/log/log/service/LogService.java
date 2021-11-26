@@ -1,9 +1,11 @@
 package com.log.log.service;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.PageUtil;
 import cn.hutool.core.util.StrUtil;
 import com.log.log.model.LogVO;
 import com.log.log.model.PageUtils;
+import com.log.log.model.ResultVO;
 import com.log.log.model.SearchDTO;
 import com.log.log.utils.DateUtils;
 import com.log.log.utils.ElasticSearchUtils;
@@ -34,10 +36,13 @@ public class LogService {
      *
      * @return
      */
-    public PageUtils<LogVO> logList(SearchDTO searchDTO) {
+    public ResultVO<PageUtils<LogVO>> logList(SearchDTO searchDTO) {
         String index = "fop-dev-";
         String day = Optional.ofNullable(searchDTO.getDay()).orElse(DateUtil.format(new Date(), "yyyy-MM-dd"));
         index += day;
+        if (!elasticSearchUtils.isExistIndex(index)) {
+            return ResultVO.error(500, "当前日期没有日志！");
+        }
         SearchSourceBuilder search = new SearchSourceBuilder();
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         if (StrUtil.isNotBlank(searchDTO.getMessage())) {
@@ -67,6 +72,6 @@ public class LogService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return page;
+        return ResultVO.success(page);
     }
 }

@@ -33,15 +33,18 @@ public class Test01 {
     @Test
     public void test03() {
         String json = "{\n" +
-                "    \"message\": \"==> Parameters: 78(Long), 自动派单给 (String), 林广炜(String), 派单(String), 0(String), (String), 2021-11-23T16:55:37.539098(LocalDateTime), BILL202111230000902(String)\",\n" +
-                "    \"thread_name\": \"ConsumeMessageThread_3\",\n" +
-                "    \"level_value\": 10000,\n" +
-                "    \"logger_name\": \"com.maycur.fop.mapper.BillHistoryMapper.insert\",\n" +
+                "    \"message\": \"已超过自动派单次数上限，单据:BILL202111230000891\",\n" +
+                "    \"thread_name\": \"scheduling-6\",\n" +
+                "    \"level_value\": 20000,\n" +
+                "    \"logger_name\": \"com.maycur.fop.service.impl.DispatchRuleServiceImpl\",\n" +
                 "    \"@version\": \"1\",\n" +
-                "    \"@timestamp\": \"2021-11-23T08:55:37.554Z\",\n" +
+                "    \"@timestamp\": \"2021-11-23T09:30:00.483Z\",\n" +
                 "    \"host\": \"localhost\",\n" +
                 "    \"port\": 54448,\n" +
-                "    \"level\": \"DEBUG\"\n" +
+                "    \"tags\": [\n" +
+                "        \"_grokparsefailure\"\n" +
+                "    ],\n" +
+                "    \"level\": \"INFO\"\n" +
                 "}";
 
         try {
